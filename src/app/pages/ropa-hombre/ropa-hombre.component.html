@@ -1,0 +1,7 @@
+<div *ngFor="let ropa of ropaHombre" class="div-item-hombre">
+    <div>
+        <a routerLink="/ropahombre/{{ropa._id}}"><img src="{{ropa.imagen}}" alt="{{ropa.tipo}}" ></a>
+        <p>{{ropa.tipo}}</p>
+        <h5>{{ropa.precio}}€</h5>
+    </div>  
+</div>
