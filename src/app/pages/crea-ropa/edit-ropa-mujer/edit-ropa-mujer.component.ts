@@ -29,23 +29,25 @@ export class EditRopaMujerComponent implements OnInit{
           tipo: [this.updateRopaMujer.tipo,[Validators.required]],
           precio:[this.updateRopaMujer.precio,[Validators.required]]
         })
-
+        this.ropaFormMujer.valueChanges.subscribe((changes)=>{
+          console.log('change', changes);
+          
+          this.updateRopaMujer = changes;
+        })
       });
 
     })
     
-    this.ropaFormMujer.valueChanges.subscribe((changes)=>{
-      this.updateRopaMujer = changes;
-    })
+    
   }
   
   onSubmit(){
     
-    const formDataMujer = new FormData();
-    formDataMujer.append('imagen', this.ropaFormMujer.get('imagen')?.value);
-    formDataMujer.append('tipo', this.ropaFormMujer.get('tipo')?.value);
-    formDataMujer.append('precio', this.ropaFormMujer.get('precio')?.value);
-    this.ropaService.updateRopaMujer(this.id, formDataMujer).subscribe(()=>this.router.navigate(['/ropamujer']))
+    // const formDataMujer = new FormData();
+    // formDataMujer.append('imagen', this.ropaFormMujer.get('imagen')?.value);
+    // formDataMujer.append('tipo', this.ropaFormMujer.get('tipo')?.value);
+    // formDataMujer.append('precio', this.ropaFormMujer.get('precio')?.value);
+    this.ropaService.updateRopaMujer(this.id, this.updateRopaMujer).subscribe(()=>this.router.navigate(['/ropamujer']))
     
   }
 }

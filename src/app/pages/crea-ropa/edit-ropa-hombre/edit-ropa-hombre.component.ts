@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-ropa-hombre.component.scss']
 })
 export class EditRopaHombreComponent {
-  ropaFormHombre!: FormGroup;
+  ropaFormHombre!: FormGroup ;
 
   updateRopaHombre!:any;
 
@@ -21,6 +21,8 @@ export class EditRopaHombreComponent {
       this.id = params.get('id');
       this.ropaService.getRopaHombre(this.id).subscribe((data) =>{
         this.updateRopaHombre = data;
+        console.log(this.id);
+        
         console.log(data);
         
         this.ropaFormHombre = this.formBuilder.group({
@@ -28,23 +30,24 @@ export class EditRopaHombreComponent {
           tipo: [this.updateRopaHombre.tipo,[Validators.required]],
           precio:[this.updateRopaHombre.precio,[Validators.required]]
         })
-
+        this.ropaFormHombre?.valueChanges.subscribe((changes)=>{
+          this.updateRopaHombre = changes;
+        })
       });
 
     })
     
-    this.ropaFormHombre.valueChanges.subscribe((changes)=>{
-      this.updateRopaHombre = changes;
-    })
+   
   }
   
   onSubmit(){
     
-    const formDataHombre = new FormData();
-    formDataHombre.append('imagen', this.ropaFormHombre.get('imagen')?.value);
-    formDataHombre.append('tipo', this.ropaFormHombre.get('tipo')?.value);
-    formDataHombre.append('precio', this.ropaFormHombre.get('precio')?.value);
-    this.ropaService.updateRopaMujer(this.id, formDataHombre).subscribe(()=>this.router.navigate(['/ropahombre']))
+    // const formDataHombre = new FormData();
+    // formDataHombre.append('imagen', this.ropaFormHombre.get('imagen')?.value);
+    // formDataHombre.append('tipo', this.ropaFormHombre.get('tipo')?.value);
+    // formDataHombre.append('precio', this.ropaFormHombre.get('precio')?.value);
+    
+    this.ropaService.updateRopaHombre(this.id, this.updateRopaHombre).subscribe(()=>this.router.navigate(['/ropahombre']))
     
   }
 }

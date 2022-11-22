@@ -1,5 +1,5 @@
 import { RopasService } from 'src/app/services/ropas.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ export class RopaMujerMoreComponent {
   id:any;
   ropaMujerMore: any;
 
-  constructor(private mujerRoute:ActivatedRoute, private ropaMujer: RopasService) {
+  constructor(private mujerRoute:ActivatedRoute, private ropaMujer: RopasService, private router: Router) {
 
     this.mujerRoute.paramMap.subscribe((params) =>{
       this.id = params.get('id');
@@ -21,4 +21,7 @@ export class RopaMujerMoreComponent {
       })
     })
   }
+  deleteRopaMujer(){
+    this.ropaMujer.deleteRopaMujer(this.id).subscribe(()=>this.router.navigate(['/ropamujer']))
+ }
 }

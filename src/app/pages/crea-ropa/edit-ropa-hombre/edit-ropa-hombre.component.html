@@ -1,4 +1,4 @@
-<form [formGroup]="ropaFormHombre" (submit)="onSubmit()">
+<form *ngIf="ropaFormHombre" [formGroup]="ropaFormHombre" (submit)="onSubmit()">
     <input type="text" formControlName="imagen" placeholder="img...">
     <input type="text" formControlName="tipo" placeholder="tipo...">
     <input type="number" formControlName="precio" placeholder="precio...">

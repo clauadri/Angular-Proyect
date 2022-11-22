@@ -3,4 +3,6 @@
     <img src="{{ropaMujerMore.imagen}}" alt="{{ropaMujerMore.tipo}}">
     <p>{{ropaMujerMore.tipo}}</p>
     <h5>{{ropaMujerMore.precio}}€</h5>
+    <button (click)="deleteRopaMujer()">Eliminar</button>
+    <button routerLink="/updateropamujer/{{ropaMujerMore?._id}}">Editar</button>
 </div>
