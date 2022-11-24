@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { RopasService } from 'src/app/services/ropas.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
@@ -11,7 +12,7 @@ export class RopaMujerMoreComponent {
   id:any;
   ropaMujerMore: any;
 
-  constructor(private mujerRoute:ActivatedRoute, private ropaMujer: RopasService, private router: Router) {
+  constructor(private mujerRoute:ActivatedRoute, private ropaMujer: RopasService, private router: Router, public authService: AuthService) {
 
     this.mujerRoute.paramMap.subscribe((params) =>{
       this.id = params.get('id');

@@ -1,6 +1,7 @@
+import { AuthconfigInterceptor } from './services/authconfig.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -20,6 +21,9 @@ import { NewRopaMujerComponent } from './pages/crea-ropa/new-ropa-mujer/new-ropa
 import { EditRopaHombreComponent } from './pages/crea-ropa/edit-ropa-hombre/edit-ropa-hombre.component';
 import { EditRopaMujerComponent } from './pages/crea-ropa/edit-ropa-mujer/edit-ropa-mujer.component';
 import { UsermenuComponent } from './components/usermenu/usermenu.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 @NgModule({
@@ -40,6 +44,9 @@ import { UsermenuComponent } from './components/usermenu/usermenu.component';
     EditRopaHombreComponent,
     EditRopaMujerComponent,
     UsermenuComponent,
+    FooterComponent,
+    LoginComponent,
+    RegisterComponent,
     
   ],
   imports: [
@@ -49,7 +56,11 @@ import { UsermenuComponent } from './components/usermenu/usermenu.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthconfigInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
